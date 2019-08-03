@@ -12,11 +12,16 @@ public class LightSource : MonoBehaviour
 	public int numRays = 20;
 	public float distance = 3f;
 
+
+	public Material mat;
+
 	MeshFilter filter;
+	MeshRenderer render;
 
     // Start is called before the first frame update
     void Start()
     {
+		//render.material = mat;
 		filter = this.GetComponent<MeshFilter>();
 		filter.mesh = generateMesh(doCircleRays());
 	}
