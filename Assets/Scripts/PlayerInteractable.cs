@@ -7,7 +7,7 @@ public abstract class PlayerInteractable : MonoBehaviour
 	// Start is called before the first frame update
 	protected void Start()
     {
-        
+		TileTime.instance.AddListener(OnTick);
     }
 
 	// Update is called once per frame
@@ -17,4 +17,7 @@ public abstract class PlayerInteractable : MonoBehaviour
     }
 
 	protected abstract void OnPlayerInteration();
+
+	protected abstract void OnTick();
+
 }
