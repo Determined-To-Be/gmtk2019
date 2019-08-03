@@ -45,7 +45,7 @@ public class CharacterController : MonoBehaviour
 
 		if (hit){ //I hit something I can't move here
 				  //Rebound
-			if (hit.transform.tag == "Iteractable") {
+			if (hit.transform.tag == "Interactable") {
 				hit.transform.gameObject.GetComponent<PlayerInteractable>().OnPlayerInteration();
 			}
 			return;
