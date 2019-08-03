@@ -16,7 +16,7 @@ public abstract class PlayerInteractable : MonoBehaviour
         
     }
 
-	protected abstract void OnPlayerInteration();
+	public abstract void OnPlayerInteration();
 
 	protected abstract void OnTick();
 

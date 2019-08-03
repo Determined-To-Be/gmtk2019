@@ -37,7 +37,7 @@ public class CharacterController : MonoBehaviour
 
 		RaycastHit2D hit;
 		if (direction == Vector2.up)
-			hit = Physics2D.Raycast(this.transform.position + Vector3.down * .1f, direction, .5f);
+			hit = Physics2D.Raycast(this.transform.position + Vector3.down * .1f, direction, .8f);
 		else
 			hit = Physics2D.Raycast(this.transform.position + Vector3.down * .1f, direction, 1);
 
@@ -45,6 +45,9 @@ public class CharacterController : MonoBehaviour
 
 		if (hit){ //I hit something I can't move here
 				  //Rebound
+			if (hit.transform.tag == "Iteractable") {
+				hit.transform.gameObject.GetComponent<PlayerInteractable>().OnPlayerInteration();
+			}
 			return;
 		}
 
