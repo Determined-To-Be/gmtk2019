@@ -39,7 +39,7 @@ public class SoundManager : MonoBehaviour
      *   - lurk
      *   - weep
      */
-    public void PlaySound(AudioClip sound, bool different=false)
+    public void PlaySound(AudioClip sound, bool different = false)
     {
         if (different)
             source.pitch = Random.Range(.95f, 1.05f);
