@@ -16,7 +16,7 @@ public class TileTime : MonoBehaviour
 				return _instance;
 			}
 
-			GameObject go = Instantiate(new GameObject());
+			GameObject go = new GameObject();
 			_instance = go.AddComponent<TileTime>();
 			return _instance;
 		}
