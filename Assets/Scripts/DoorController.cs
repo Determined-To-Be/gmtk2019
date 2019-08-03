@@ -21,6 +21,7 @@ public class DoorController : PlayerInteractable
 
     public override void OnPlayerInteration()
     {
+        Debug.Log("wow!");
         if (!isLocked)
         {
             coll.enabled = false;

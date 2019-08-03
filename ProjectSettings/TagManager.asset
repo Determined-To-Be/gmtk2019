@@ -7,7 +7,7 @@ TagManager:
   - LightBox
   - KeyBox
   - Enemy
-  - MovableObject
+  - Interactable
   layers:
   - Default
   - TransparentFX
