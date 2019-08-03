@@ -19,7 +19,7 @@ public class DoorController : PlayerInteractable
         rend = this.GetComponent<SpriteRenderer>();
     }
 
-    protected override void OnPlayerInteration()
+    public override void OnPlayerInteration()
     {
         if (!isLocked)
         {
