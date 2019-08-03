@@ -2,20 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoorController : MonoBehaviour
+public class DoorController : PlayerInteractable
 {
-    bool isOpen = false;
+    Sprite Open;
+    Sprite Closed;
+
+    BoxCollider2D coll;
+    SpriteRenderer rend;
     bool isLocked = false;
 
-    bool canGoThroughDoor()
+    protected void Start()
     {
-        return !isLocked;
+        base.Start();
+        coll = this.GetComponent<BoxCollider2D>();
+        rend = this.GetComponent<SpriteRenderer>();
     }
 
-    //if open, disable collider
-    void Start()
+    protected override void OnPlayerInteration()
     {
-        //TileTime.instance.AddListener();
+        if (!isLocked)
+        {
+            coll.enabled = false;
+            rend.sprite = Closed;
+        }
     }
-
 }
