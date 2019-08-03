@@ -42,10 +42,12 @@ public class LightSource : MonoBehaviour
 			Vector2 dir = new Vector2(x, y);
 
 			RaycastHit2D hit = Physics2D.Raycast(this.transform.position, dir, distance);
-			
+
 			if (hit == false) {
 				hit.point = (Vector2)this.transform.position + dir * distance;	
 			}
+
+			
 
 			Debug.DrawLine(this.transform.position, hit.point);
 
