@@ -41,7 +41,11 @@ public class LightSource : MonoBehaviour
 			float x = Mathf.Cos(i), y = Mathf.Sin(i);
 			Vector2 dir = new Vector2(x, y);
 
-			RaycastHit2D hit = Physics2D.Raycast(this.transform.position, dir, distance);
+			RaycastHit2D hit;
+			if (dir == Vector2.up)
+				hit = Physics2D.Raycast(this.transform.position, dir, distance/2);
+			else
+				hit = Physics2D.Raycast(this.transform.position, dir, distance);
 
 			if (hit == false) {
 				hit.point = (Vector2)this.transform.position + dir * distance;	
