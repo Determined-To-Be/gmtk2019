@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TileTime : MonoBehaviour
 {
 
+	UnityEvent tile_event = new UnityEvent();
 
 	public static TileTime _instance;
 	public static TileTime instance {
@@ -15,7 +17,7 @@ public class TileTime : MonoBehaviour
 			}
 
 			GameObject go = Instantiate(new GameObject());
-			go.AddComponent<TileTime>();
+			_instance = go.AddComponent<TileTime>();
 			return _instance;
 		}
 
@@ -23,6 +25,21 @@ public class TileTime : MonoBehaviour
 
     void Awake()
     {
-		_instance = this.GetComponent<TileTime>();
+
+		if(_instance == null){
+			_instance = this.GetComponent<TileTime>();
+		}
     }
+
+	void Tick() {
+		tile_event.Invoke();
+	}
+
+	public void AddListener(UnityAction call) {
+		tile_event.AddListener(call);
+	}
+
+	public void RemoveListener(UnityAction call){
+		tile_event.RemoveListener(call);
+	}
 }

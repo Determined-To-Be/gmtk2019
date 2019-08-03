@@ -8,23 +8,26 @@ public class CharacterController : MonoBehaviour
 	[Tooltip("In Seconds")]
 	public float moveSpeed = 16f;
 	public bool canMove = true;
+	Vector2 direction;
+
+	public GameObject item;
 
 	// Start is called before the first frame update
 	void Start()
 	{
-
+		TileTime.instance.AddListener(move);
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-		Vector2 moveDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-		if (canMove && moveDirection.sqrMagnitude > .1f) {
-			move(moveDirection);
+		direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+		if (canMove && direction.sqrMagnitude > .1f) {
+			move();
 		}
 	}
 
-	void move(Vector2 direction) {
+	void move() {
 		//We need to prevent the character from moving in the direction of a wall or a collision
 		if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
 			direction.y = 0;
@@ -54,10 +57,15 @@ public class CharacterController : MonoBehaviour
 
 	IEnumerator moveTo(Vector2 goal, float speed) {
 		canMove = false;
+		Vector3 lastpos = this.transform.position;
+		
 		while (Vector2.Distance((Vector2)this.transform.position, goal) > .05f) {
 			this.transform.position = Vector3.Lerp(this.transform.position, goal, speed * Time.deltaTime);
 			yield return null;
 		}
+
+		if (item != null)
+			item.transform.position = lastpos;
 
 		this.transform.position = new Vector3(Mathf.RoundToInt(this.transform.position.x), Mathf.RoundToInt(this.transform.position.y), this.transform.position.z);
 		canMove = true;
