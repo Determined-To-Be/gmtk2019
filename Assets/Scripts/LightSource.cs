@@ -2,34 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-[RequireComponent(typeof(MeshFilter))]
-[RequireComponent(typeof(MeshRenderer))]
 public class LightSource : MonoBehaviour
 {
-	
+
 	[Range(3, 200)]
 	public int numRays = 20;
 	public float distance = 3f;
-
 
 	public Material mat;
 
 	MeshFilter filter;
 	MeshRenderer render;
 
+	Texture2D tex;
+
     // Start is called before the first frame update
     void Start()
     {
-		//render.material = mat;
-		filter = this.GetComponent<MeshFilter>();
-		filter.mesh = generateMesh(doCircleRays());
+
+		filter = this.gameObject.AddComponent<MeshFilter>();
+		render = this.gameObject.AddComponent<MeshRenderer>();
+		render.material = mat;
+		filter.mesh = generateMesh(doCircleRays());	
 	}
 
     // Update is called once per frame
-    void Update()
-    {
-		//ModifyMesh(filter.mesh);
+    void LateUpdate(){
 		filter.mesh = generateMesh(doCircleRays());
 	}
 
@@ -47,9 +45,7 @@ public class LightSource : MonoBehaviour
 				hit.point = (Vector2)this.transform.position + dir * distance;	
 			}
 
-			
-
-			Debug.DrawLine(this.transform.position, hit.point);
+			//Debug.DrawLine(this.transform.position, hit.point);
 
 			points.Push(hit.point - (Vector2)this.transform.position);
 
