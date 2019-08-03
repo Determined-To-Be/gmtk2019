@@ -3,13 +3,29 @@
 public class SoundManager : MonoBehaviour
 {
     private AudioSource source;
-    public static SoundManager instance = null;
+
+    private static SoundManager _instance;
+    public static SoundManager instance
+    {
+        get
+        {
+            if (_instance != null)
+            {
+                return _instance;
+            }
+
+            GameObject go = new GameObject();
+            _instance = go.AddComponent<SoundManager>();
+            return _instance;
+        }
+
+    }
 
     void Awake()
     {
-        if (instance == null)
-            instance = this;
-        else if (instance != this)
+        if (_instance == null)
+            _instance = GetComponent<SoundManager>();
+        else if (_instance != this)
             Destroy(gameObject);
         DontDestroyOnLoad(gameObject);
     }
