@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class DoorController : PlayerInteractable
 {
-    Sprite Open;
-    Sprite Closed;
+    public Sprite Open;
+    public Sprite Closed;
 
     BoxCollider2D coll;
     SpriteRenderer rend;
+
     bool isLocked = false;
 
     protected void Start()
@@ -23,7 +24,12 @@ public class DoorController : PlayerInteractable
         if (!isLocked)
         {
             coll.enabled = false;
-            rend.sprite = Closed;
+            rend.sprite = Open;
         }
+    }
+
+    protected override void OnTick()
+    {
+        
     }
 }
