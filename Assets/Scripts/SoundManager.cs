@@ -2,7 +2,10 @@
 
 public class SoundManager : MonoBehaviour
 {
-    private AudioSource source;
+    private AudioSource player;
+
+    public enum PlayerSound { death, dopple, lurk, weep, drop, pickup, step, wall };
+    public AudioClip[] clips;
 
     private static SoundManager _instance;
     public static SoundManager instance
@@ -18,7 +21,11 @@ public class SoundManager : MonoBehaviour
             _instance = go.AddComponent<SoundManager>();
             return _instance;
         }
+    }
 
+    void Start()
+    {
+        player = GetComponent<AudioSource>();
     }
 
     void Awake()
@@ -30,38 +37,13 @@ public class SoundManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    void Start()
-    {
-        source = GetComponent<AudioSource>();
-    }
-
-    void Update()
-    {
-
-    }
-
-    /*
-     * PlaySound(sound):
-     * - death
-     * - item
-     *   - drop
-     *   - pickup
-     * - step wall
-     * 
-     * PlaySound(sound, true):
-     * - step
-     * - enemy
-     *   - dopple
-     *   - lurk
-     *   - weep
-     */
-    public void PlaySound(AudioClip sound, bool different = false)
+    public void PlaySound(PlayerSound sound, bool different = false)
     {
         if (different)
-            source.pitch = Random.Range(.95f, 1.05f);
+            player.pitch = Random.Range(.95f, 1.05f);
         else
-            source.pitch = 1f;
-        source.clip = sound;
-        source.Play();
+            player.pitch = 1f;
+        player.clip = clips[(int)sound];
+        player.Play();
     }
 }
