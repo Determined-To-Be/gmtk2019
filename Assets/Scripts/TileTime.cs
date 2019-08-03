@@ -5,22 +5,24 @@ using UnityEngine;
 public class TileTime : MonoBehaviour
 {
 
-	public static TileTime instance;
 
-	public static void create() {
-		if (instance == null) {
-			return;
+	public static TileTime _instance;
+	public static TileTime instance {
+		get {
+			if (_instance != null)
+			{
+				return _instance;
+			}
+
+			GameObject go = Instantiate(new GameObject());
+			go.AddComponent<TileTime>();
+			return _instance;
 		}
 
-		GameObject go = Instantiate(new GameObject());
-		go.AddComponent<TileTime>();
 	}
-
 
     void Awake()
     {
-		instance = this.GetComponent<TileTime>();
-		create();
+		_instance = this.GetComponent<TileTime>();
     }
-
 }
