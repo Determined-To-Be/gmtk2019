@@ -248,7 +248,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1000310890}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1220210104}
@@ -299,8 +299,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numRays: 200
-  distance: 15
-  mat: {fileID: 2100000, guid: bd2bb6f3c94862a4d988aa988049bd74, type: 2}
+  distance: 5
+  mat: {fileID: 2100000, guid: 963ca1d275cd08b45a9ab07c6528c8a6, type: 2}
 --- !u!1 &1763391981
 GameObject:
   m_ObjectHideFlags: 0
@@ -350,7 +350,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7795fa68f180b95419d9d69cef310ada, type: 2}
+  - {fileID: 2100000, guid: 353ae66005ee8ba4fb14444ef33238a6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
