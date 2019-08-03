@@ -25,5 +25,7 @@ public class CharacterController : MonoBehaviour
 		if (hit){ //I hit something I can't move here
 
 		}
+
+		//We need to clamp the position to an int and the plus .5 on the x and -.5 on the y
 	}
 }
