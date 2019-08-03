@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CharacterController : MonoBehaviour
 {
-
-	[Tooltip("In Seconds")]
+	UnityEvent player_event = new UnityEvent();
+	
 	public float moveSpeed = 16f;
 	public bool canMove = true;
 	Vector2 direction;
@@ -43,8 +44,7 @@ public class CharacterController : MonoBehaviour
 		Debug.DrawRay(this.transform.position, direction, Color.green);
 
 		if (hit){ //I hit something I can't move here
-			//Rebound
-
+				  //Rebound
 			return;
 		}
 
