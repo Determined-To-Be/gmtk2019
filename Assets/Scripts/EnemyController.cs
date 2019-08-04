@@ -14,7 +14,7 @@ public class EnemyController : MonoBehaviour
     public enum Enemy { lurkie, weepie, doppie };
     public Enemy enemy;
     public GameObject path;
-    public bool isLit = false, isMirroredX = false;
+    public bool isLit = false, isMirroredX = true, isMirroredY = true;
     public Sprite[] weepieSprites;
 
     void Start()
@@ -123,7 +123,7 @@ public class EnemyController : MonoBehaviour
         Vector2 direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         if (isMirroredX)
             direction.x *= -1f;
-        else
+        if (isMirroredY)
             direction.y *= -1f;
         if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
             direction.y = 0;
