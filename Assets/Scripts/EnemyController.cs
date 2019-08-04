@@ -75,7 +75,8 @@ public class EnemyController : MonoBehaviour
             Vector2 place = CharacterController.instance.transform.position;
             direction.x = pos.x > place.x ? Vector2.left.x : (pos.x < place.x ? Vector2.right.x : 0f);
             direction.y = pos.y > place.y ? Vector2.down.y : (pos.y < place.y ? Vector2.up.y : 0f);
-        } else
+        }
+        else
         {
             isLit = false;
         }
