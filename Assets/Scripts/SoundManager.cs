@@ -1,14 +1,17 @@
-﻿using UnityEngine;
-[RequireComponent (typeof(AudioSource))]
+﻿using System.Collections;
+using UnityEngine;
+[RequireComponent(typeof(AudioSource))]
 
 public class SoundManager : MonoBehaviour
 {
-    private AudioSource player;
+    AudioSource[] player; // 0 = player, 1 = ambient bg, 2 = ambient sfx
 
     public enum PlayerSound { death, dopple, lurk, weep, drop, pickup, step, wall };
-    public AudioClip[] clips;
+    public float variety;
+    public AudioClip[] playerClips;
+    public AudioClip[] ambientTracks;
 
-    private static SoundManager _instance;
+    static SoundManager _instance;
     public static SoundManager instance
     {
         get
@@ -26,7 +29,8 @@ public class SoundManager : MonoBehaviour
 
     void Start()
     {
-        player = GetComponent<AudioSource>();
+        player = GetComponents<AudioSource>();
+        PlayAmbientTracks();
     }
 
     void Awake()
@@ -38,13 +42,32 @@ public class SoundManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    IEnumerator doAudioClip(PlayerSound sound, bool different)
+    {
+        player[0].pitch = different ? Random.Range(1f - variety, 1f + variety) : 1f;
+        player[0].clip = playerClips[(int)sound];
+        player[0].Play();
+        yield return new WaitWhile(() => player[0].isPlaying);
+    }
+
     public void PlaySound(PlayerSound sound, bool different = false)
     {
-        if (different)
-            player.pitch = Random.Range(.95f, 1.05f);
-        else
-            player.pitch = 1f;
-        player.clip = clips[(int)sound];
-        player.Play();
+        StartCoroutine(doAudioClip(sound, different));
+    }
+
+    IEnumerator doAmbientTracks()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(Random.Range(45f, 105f));
+            player[1].clip = ambientTracks[Mathf.FloorToInt(Random.Range(0f, (ambientTracks.Length - Mathf.Epsilon)))];
+            player[1].Play();
+            yield return new WaitWhile(() => player[1].isPlaying);
+        }
+    }
+
+    void PlayAmbientTracks()
+    {
+        StartCoroutine(doAmbientTracks());
     }
 }
