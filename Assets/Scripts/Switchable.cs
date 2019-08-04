@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Switchable : MonoBehaviour
+public abstract class Switchable : PlayerInteractable
 {
 
 	public SwitchBase controlSwitch;
