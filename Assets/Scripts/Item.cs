@@ -2,13 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Item : MonoBehaviour
+public class Item : MonoBehaviour
 {
-
-	public abstract void UseItem();
-
-	void OnTriggerEnter2D(Collider2D collision)
-	{
-		
-	}
+	public enum ItemType { Lantern, Key };
+	public ItemType itemType;
 }

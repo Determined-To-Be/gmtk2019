@@ -11,7 +11,7 @@ public class CharacterController : MonoBehaviour
 	public bool canMove = true;
 	Vector2 direction;
 
-	public GameObject item;
+	public Item item;
 
 	public static CharacterController instance;
 
@@ -64,6 +64,9 @@ public class CharacterController : MonoBehaviour
 				if (hit.transform.tag == "Interactable") {
 					hit.transform.gameObject.GetComponent<PlayerInteractable>().OnPlayerInteration();
 				}
+
+				ScreenShake.instance.Shake(.1f, .1f);
+				SoundManager.instance.PlaySound(SoundManager.PlayerSound.wall, true);
 				return;
 			}
 		}
@@ -71,7 +74,6 @@ public class CharacterController : MonoBehaviour
 		//this.transform.position += (Vector3)direction.normalized;
 		//this.transform.position = new Vector3(Mathf.RoundToInt(this.transform.position.x) + .5f, Mathf.RoundToInt(this.transform.position.y) + .5f, 0);
 		//We need to clamp the position to an int and the plus .5 on the x and -.5 on the y
-		ScreenShake.instance.Shake(.1f, .1f);
 		SoundManager.instance.PlaySound(SoundManager.PlayerSound.step, true);
 		StartCoroutine(moveTo(this.transform.position + (Vector3)direction.normalized, moveSpeed));
 	}
@@ -95,7 +97,10 @@ public class CharacterController : MonoBehaviour
 	void OnTriggerEnter2D(Collider2D coll)
 	{
 		if (coll.transform.tag == "Item") {
-			item = coll.gameObject;
+			if (coll.gameObject != null && coll.gameObject == item.gameObject)
+				return;
+			SoundManager.instance.PlaySound(SoundManager.PlayerSound.pickup);
+			item = coll.gameObject.GetComponent<Item>() ;
 		}
 	}
 }

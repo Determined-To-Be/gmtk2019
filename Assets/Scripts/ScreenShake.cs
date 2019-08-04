@@ -25,21 +25,12 @@ public class ScreenShake : MonoBehaviour
 		if (_instance == null){
 			_instance = this.GetComponent<ScreenShake>();
 		}
+		initPos = this.transform.position;
 	}
 
 	public Vector3 initPos;
 
-	// Start is called before the first frame update
-	void Start()
-    {
-		initPos = this.transform.position;
-    }
-
 	public void Shake(float intensity, float duration) {
-		if (initPos != this.transform.position) {
-			initPos = this.transform.position;
-		}
-
 		StartCoroutine(shakeScreen(intensity, duration));
 	}
 

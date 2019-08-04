@@ -45,13 +45,18 @@ public class LightSource : MonoBehaviour
 
 			if (hit == false){
 				hit.point = (Vector2)this.transform.position + dir * distance;
+			} else {
+				if (hit.collider.transform.tag == "LightBox")
+				{
+					hit.transform.gameObject.GetComponent<SwitchBase>().state = true;
+				}
+				else if (hit.collider.transform.tag == "Enemy")
+				{
+					hit.transform.gameObject.GetComponent<EnemyController>().isLit = true;
+				}
 			}
 
-			/*if (hit.transform.tag == "LightBox") {
-
-			} else if (hit.transform.tag == "Enemy") {
-				hit.transform.gameObject.GetComponent<EnemyController>().isLit = true;
-			}*/
+			
 			//Debug.DrawLine(this.transform.position, hit.point);
 
 			points.Push(hit.point - (Vector2)this.transform.position);
