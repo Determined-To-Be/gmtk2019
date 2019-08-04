@@ -20,6 +20,11 @@ public class DoorController : PlayerInteractable
         base.Start();
         coll = this.GetComponent<BoxCollider2D>();
         rend = this.GetComponent<SpriteRenderer>();
+
+        if(isLocked)
+        {
+            rend.sprite = Locked;
+        }
     }
 
     public void LockDoor()
