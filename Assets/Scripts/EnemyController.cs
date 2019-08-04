@@ -10,11 +10,11 @@ public class EnemyController : MonoBehaviour
     bool wasLit = false;
     SpriteRenderer weepieSpriteRenderer;
 
-    public float moveSpeed;
+    public float moveSpeed = 16f;
     public enum Enemy { lurkie, weepie, doppie };
     public Enemy enemy;
     public GameObject path;
-    public bool isLit = false, isMirroredX;
+    public bool isLit = false, isMirroredX = false;
     public Sprite[] weepieSprites;
 
     void Start()
@@ -24,7 +24,8 @@ public class EnemyController : MonoBehaviour
         {
             waypoints = path.GetComponentsInChildren<Transform>();
             transform.position = waypoints[wpIdx].position;
-        } else if (enemy == Enemy.weepie)
+        }
+        else if (enemy == Enemy.weepie)
         {
             weepieSpriteRenderer = GetComponent<SpriteRenderer>();
         }

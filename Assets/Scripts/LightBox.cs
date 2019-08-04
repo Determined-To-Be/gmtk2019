@@ -1,18 +1,31 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Events;
 
-public class LightBox : SwitchBase
+public class LightBox : MonoBehaviour
 {
-    // Start is called before the first frame update
+    bool wasState = false;
+
+    public bool state = false;
+    public UnityEvent switch_enable = new UnityEvent();
+    public UnityEvent switch_disable = new UnityEvent();
+
     void Start()
     {
-		base.Start();
+        TileTime.instance.AddListener(OnTick);
     }
 
-    // Update is called once per frame
-    void onTick()
+    void OnTick()
     {
-		this.state = false;
+        if (state && !wasState)
+        {
+            switch_enable.Invoke();
+            wasState = true;
+        }
+        else if (!state && wasState)
+        {
+            switch_disable.Invoke();
+            wasState = false;
+        }
+        state = false;
     }
 }

@@ -8,7 +8,7 @@ public class PressurePlate : SwitchBase
 
     private void Start()
     {
-		base.Start();
+		//base.Start();
         plate = GetComponent<SpriteRenderer>();
     }
 

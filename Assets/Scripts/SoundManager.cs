@@ -7,7 +7,7 @@ public class SoundManager : MonoBehaviour
     AudioSource[] player; // 0 = player, 1 = ambient bg, 2 = ambient sfx
 
     public enum PlayerSound { death, dopple, lurk, weep, drop, pickup, step, wall };
-    public float variety;
+    public float variety = .075f;
     public AudioClip[] playerClips, ambientClips, ambientTracks;
 
     static SoundManager _instance;
