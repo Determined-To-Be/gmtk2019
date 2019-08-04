@@ -11,6 +11,7 @@ public class EnemyController : MonoBehaviour
     public enum Enemy { lurkie, weepie, doppie };
     public Enemy enemy;
     public GameObject path;
+    public bool isLit = false;
 
     void Start()
     {
@@ -18,7 +19,7 @@ public class EnemyController : MonoBehaviour
         if (enemy == Enemy.lurkie)
         {
             waypoints = path.GetComponentsInChildren<Transform>();
-            gameObject.transform.position = waypoints[wpIdx].position;
+            transform.position = waypoints[wpIdx].position;
         }
     }
 
@@ -52,51 +53,53 @@ public class EnemyController : MonoBehaviour
 
     void lurk()
     {
-        Vector2 direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-
+        Vector2 direction = waypoints[wpIdx].position - transform.position;
         if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
             direction.y = 0;
         else
             direction.x = 0;
+        direction = direction.normalized;
 
         List<RaycastHit2D> hits = new List<RaycastHit2D>();
         if (direction == Vector2.up)
         {
-            hits.Add(Physics2D.Raycast(this.transform.position + Vector3.down * .1f + Vector3.left * .1f, direction, .8f, ~LayerMask.GetMask("Player", "Enviroment", "Item")));
-            hits.Add(Physics2D.Raycast(this.transform.position + Vector3.down * .1f + Vector3.right * .1f, direction, .8f, ~LayerMask.GetMask("Player", "Enviroment", "Item")));
+            hits.Add(Physics2D.Raycast(transform.position + Vector3.down * .1f + Vector3.left * .1f, direction, .8f, ~LayerMask.GetMask("Player", "Enviroment", "Item")));
+            hits.Add(Physics2D.Raycast(transform.position + Vector3.down * .1f + Vector3.right * .1f, direction, .8f, ~LayerMask.GetMask("Player", "Enviroment", "Item")));
 
-            Debug.DrawRay(this.transform.position + Vector3.down * .1f + Vector3.left * .1f, direction * .8f);
-            Debug.DrawRay(this.transform.position + Vector3.down * .1f + Vector3.right * .1f, direction * .8f);
-
+            Debug.DrawRay(transform.position + Vector3.down * .1f + Vector3.left * .1f, direction * .8f);
+            Debug.DrawRay(transform.position + Vector3.down * .1f + Vector3.right * .1f, direction * .8f);
         }
         else if (direction == Vector2.down)
         {
-            hits.Add(Physics2D.Raycast(this.transform.position + Vector3.down * .1f + Vector3.left * .1f, direction, 1.1f, ~LayerMask.GetMask("Player", "Enviroment", "Item")));
-            hits.Add(Physics2D.Raycast(this.transform.position + Vector3.down * .1f + Vector3.right * .1f, direction, 1.1f, ~LayerMask.GetMask("Player", "Enviroment", "Item")));
+            hits.Add(Physics2D.Raycast(transform.position + Vector3.down * .1f + Vector3.left * .1f, direction, 1.1f, ~LayerMask.GetMask("Player", "Enviroment", "Item")));
+            hits.Add(Physics2D.Raycast(transform.position + Vector3.down * .1f + Vector3.right * .1f, direction, 1.1f, ~LayerMask.GetMask("Player", "Enviroment", "Item")));
 
-            Debug.DrawRay(this.transform.position + Vector3.down * .1f + Vector3.left * .1f, direction * 1.1f);
-            Debug.DrawRay(this.transform.position + Vector3.down * .1f + Vector3.right * .1f, direction * 1.1f);
+            Debug.DrawRay(transform.position + Vector3.down * .1f + Vector3.left * .1f, direction * 1.1f);
+            Debug.DrawRay(transform.position + Vector3.down * .1f + Vector3.right * .1f, direction * 1.1f);
         }
         else
         {
-            hits.Add(Physics2D.Raycast(this.transform.position + Vector3.down * .1f, direction, 1.1f, ~LayerMask.GetMask("Player", "Enviroment", "Item")));
+            hits.Add(Physics2D.Raycast(transform.position + Vector3.down * .1f, direction, 1.1f, ~LayerMask.GetMask("Player", "Enviroment", "Item")));
 
-            Debug.DrawRay(this.transform.position + Vector3.down * .1f, direction * 1.1f);
+            Debug.DrawRay(transform.position + Vector3.down * .1f, direction * 1.1f);
         }
-
         foreach (RaycastHit2D hit in hits)
         {
             if (hit)
             {
-                if (hit.transform.tag == "Interactable")
-                {
-                    hit.transform.gameObject.GetComponent<PlayerInteractable>().OnPlayerInteration();
-                }
                 return;
             }
         }
 
         Vector3 destination = transform.position + (Vector3)direction.normalized;
+        if (destination == waypoints[wpIdx].position)
+        {
+            if (++wpIdx >= waypoints.Length)
+            {
+                SoundManager.instance.PlaySound(SoundManager.PlayerSound.lurk, true);
+                wpIdx = 0;
+            }
+        }
 
         StartCoroutine(moveTo(destination));
     }
