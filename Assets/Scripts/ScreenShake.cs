@@ -5,7 +5,7 @@ using UnityEngine;
 public class ScreenShake : MonoBehaviour
 {
 
-	public static ScreenShake _instance;
+	private static ScreenShake _instance;
 	public static ScreenShake instance
 	{
 		get
@@ -15,8 +15,8 @@ public class ScreenShake : MonoBehaviour
 				return _instance;
 			}
 
-			GameObject go = Instantiate(new GameObject());
-			go.AddComponent<TileTime>();
+			GameObject go = new GameObject();
+			_instance = go.AddComponent<ScreenShake>();
 			return _instance;
 		}
 
@@ -30,21 +30,17 @@ public class ScreenShake : MonoBehaviour
 		initPos = this.transform.position;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-	void Shake(float intensity, float duration) {
+	public void Shake(float intensity, float duration) {
 		StartCoroutine(shakeScreen(intensity, duration));
 	}
 
 	IEnumerator shakeScreen(float intensity, float duration) {
-
-		
-
+		float x = Random.Range(0, 100), y = Random.Range(0, 100);
+		while (duration > 0) {
+			this.transform.position = initPos + intensity * new Vector3(Mathf.PerlinNoise(x + duration, y + duration), Mathf.PerlinNoise(x + duration, y + duration));
+			duration -= Time.deltaTime;
+			yield return null;
+		}
 		this.transform.position = initPos;
-		yield return null;
 	}
 }

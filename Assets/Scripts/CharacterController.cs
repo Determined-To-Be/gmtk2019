@@ -57,7 +57,7 @@ public class CharacterController : MonoBehaviour
 		//this.transform.position += (Vector3)direction.normalized;
 		//this.transform.position = new Vector3(Mathf.RoundToInt(this.transform.position.x) + .5f, Mathf.RoundToInt(this.transform.position.y) + .5f, 0);
 		//We need to clamp the position to an int and the plus .5 on the x and -.5 on the y
-
+		ScreenShake.instance.Shake(10, 10);
 		StartCoroutine(moveTo(this.transform.position + (Vector3)direction.normalized, moveSpeed));
 	}
 
