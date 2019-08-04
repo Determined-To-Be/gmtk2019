@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 1801784604517824580}
   - component: {fileID: 1801784604517824579}
   - component: {fileID: 1801784604517824582}
-  m_Layer: 0
-  m_Name: post
+  m_Layer: 9
+  m_Name: Item Stand
   m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -70,7 +70,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 3274548372200919155, guid: 205f237baeb5ded4ebeea8e3480d3fa5,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

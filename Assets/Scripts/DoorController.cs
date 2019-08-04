@@ -7,6 +7,7 @@ public class DoorController : PlayerInteractable
 {
     public Sprite Open;
     public Sprite Closed;
+    public Sprite Locked;
     public string NextLevel;
 
     BoxCollider2D coll;
@@ -24,11 +25,13 @@ public class DoorController : PlayerInteractable
     public void LockDoor()
     {
         isLocked = true;
+        rend.sprite = Locked;
     }
 
     public void UnlockDoor()
     {
         isLocked = false;
+        rend.sprite = Closed;
     }
 
     public override void OnPlayerInteration()
