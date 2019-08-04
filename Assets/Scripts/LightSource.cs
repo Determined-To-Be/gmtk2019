@@ -45,6 +45,9 @@ public class LightSource : MonoBehaviour
 				hit.point = (Vector2)this.transform.position + dir * distance;	
 			}
 
+			if (hit.transform.tag == "Enemy") {
+				hit.transform.gameObject.GetComponent<EnemyController>().isLit = true;
+			}
 			//Debug.DrawLine(this.transform.position, hit.point);
 
 			points.Push(hit.point - (Vector2)this.transform.position);
