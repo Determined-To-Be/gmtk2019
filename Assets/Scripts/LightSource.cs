@@ -5,9 +5,11 @@ using UnityEngine;
 public class LightSource : MonoBehaviour
 {
 
-	[Range(3, 200)]
+	[Range(3, 900)]
 	public int numRays = 20;
 	public float distance = 3f;
+
+	public float maskCutawayDst = .1f;
 
 	public Material mat;
 
@@ -65,7 +67,8 @@ public class LightSource : MonoBehaviour
 		int[] triangles = new int[(points.Length) * 3];
 
 		for (int i = 0; i < points.Length; i++) {
-			//uv[i] = points[i];
+
+			points[i] = points[i] + Vector3.forward * maskCutawayDst;
 
 			if (i < points.Length-2){
 				triangles[i * 3] = 0;
