@@ -38,20 +38,23 @@ public class CharacterController : MonoBehaviour
 		else
 			direction.x = 0;
 
-		RaycastHit2D hit;
-		if (direction == Vector2.up)
-			hit = Physics2D.Raycast(this.transform.position + Vector3.down * .1f, direction, .8f);
-		else
-			hit = Physics2D.Raycast(this.transform.position + Vector3.down * .1f, direction, 1.1f);
+		List<RaycastHit2D> hits = new List<RaycastHit2D>();
+		if (direction == Vector2.up){
+			hits.Add(Physics2D.Raycast(this.transform.position + Vector3.down * .1f, direction, .8f));
+		} else {
+			hits.Add(Physics2D.Raycast(this.transform.position + Vector3.down * .1f, direction, 1.1f));
+		}
 
 		Debug.DrawRay(this.transform.position, direction, Color.green);
 
-		if (hit){ //I hit something I can't move here
-			//Rebound
-			if (hit.transform.tag == "Interactable") {
-				hit.transform.gameObject.GetComponent<PlayerInteractable>().OnPlayerInteration();
+		foreach(RaycastHit2D hit in hits) {
+			if (hit){ //I hit something I can't move here
+				//Rebound
+				if (hit.transform.tag == "Interactable") {
+					hit.transform.gameObject.GetComponent<PlayerInteractable>().OnPlayerInteration();
+				}
+				return;
 			}
-			return;
 		}
 
 		//this.transform.position += (Vector3)direction.normalized;
@@ -63,7 +66,7 @@ public class CharacterController : MonoBehaviour
 
 	IEnumerator moveTo(Vector2 goal, float speed) {
 		canMove = false;
-		Vector3 lastpos = this.transform.position;
+		Vector3 lastpos = this.transform.position + Vector3.down * .1f;
 		
 		while (Vector2.Distance((Vector2)this.transform.position, goal) > .05f) {
 			this.transform.position = Vector3.Lerp(this.transform.position, goal, speed * Time.deltaTime);

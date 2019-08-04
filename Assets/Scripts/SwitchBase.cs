@@ -5,7 +5,11 @@ using UnityEngine.Events;
 
 public class SwitchBase : MonoBehaviour
 {
-	protected UnityEvent switch_event = new UnityEvent();
+	public bool state = false;
+	public UnityEvent switch_enable = new UnityEvent();
+	public UnityEvent switch_disable = new UnityEvent();
+	
+
 
 	// Start is called before the first frame update
 	void Start()
@@ -14,16 +18,6 @@ public class SwitchBase : MonoBehaviour
     }
 
 	void OnTick() {
-
-	}
-
-	public void AddListener(UnityAction call)
-	{
-		switch_event.AddListener(call);
-	}
-
-	public void RemoveListener(UnityAction call)
-	{
-		switch_event.RemoveListener(call);
+		
 	}
 }
