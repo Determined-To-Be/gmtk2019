@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CharacterController : MonoBehaviour
 {
@@ -169,5 +170,10 @@ public class CharacterController : MonoBehaviour
             }
             item = coll.gameObject.GetComponent<Item>();
         }
-    }
+
+		if (coll.transform.tag == "Enemy") {
+			SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+		}
+
+	}
 }
