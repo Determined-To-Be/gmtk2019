@@ -9,7 +9,7 @@ public class LightSource : MonoBehaviour
 	public int numRays = 20;
 	public float distance = 3f;
 
-	public float maskCutawayDst = .1f;
+	public float maskCutawayDst = 1;
 
 	public Material mat;
 
@@ -68,7 +68,7 @@ public class LightSource : MonoBehaviour
 
 		for (int i = 0; i < points.Length; i++) {
 
-			points[i] = points[i] + Vector3.forward * maskCutawayDst;
+			points[i] = points[i] * maskCutawayDst;
 
 			if (i < points.Length-2){
 				triangles[i * 3] = 0;
