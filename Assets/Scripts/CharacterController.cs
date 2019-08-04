@@ -107,10 +107,11 @@ public class CharacterController : MonoBehaviour
 		//this.transform.position += (Vector3)direction.normalized;
 		//this.transform.position = new Vector3(Mathf.RoundToInt(this.transform.position.x) + .5f, Mathf.RoundToInt(this.transform.position.y) + .5f, 0);
 		//We need to clamp the position to an int and the plus .5 on the x and -.5 on the y
-		SoundManager.instance.PlaySound(SoundManager.PlayerSound.step, true);
-		if (canMove)
+
+		if (canMove){
+			SoundManager.instance.PlaySound(SoundManager.PlayerSound.step, true);
 			StartCoroutine(moveTo(this.transform.position + (Vector3)direction.normalized, moveSpeed));
-		else {
+		} else {
 			StartCoroutine(cantMoveTo(this.transform.position + (Vector3)direction.normalized, moveSpeed));
 		}
 	}

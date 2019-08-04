@@ -19,7 +19,7 @@ public class PushableBox : PlayerInteractable
 		//StartCoroutine(moveTo(this.transform.position + dir, 16f));
 	}
 
-	void move(Vector2 direction)
+	protected void move(Vector2 direction)
 	{
 		//We need to prevent the character from moving in the direction of a wall or a collision
 		if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
