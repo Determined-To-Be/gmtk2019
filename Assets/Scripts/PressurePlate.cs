@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
-using UnityEngine.Events;
 
-public class PressurePlate : MonoBehaviour
+
+public class PressurePlate : SwitchBase
 {
     private SpriteRenderer plate;
     private UnityEvent stepOn = new UnityEvent();
