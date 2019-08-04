@@ -104,7 +104,7 @@ public class EnemyController : MonoBehaviour
 
     private void doLurkie()
     {
-
+        // TODO
     }
 
     IEnumerator moveTo(Vector2 goal, float speed)
