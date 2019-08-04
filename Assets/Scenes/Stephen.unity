@@ -502,17 +502,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef05dae2d0b9af446b8175b3862fb35e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: {x: 1, y: 0}
+  direction: {x: 0, y: 0}
   enemy: 0
   moveSpeed: 16
   item: {fileID: 0}
   isMirrorX: 1
   isLit: 0
-  waypoints:
-  - {fileID: 373613840}
-  - {fileID: 1524896343}
-  - {fileID: 834996982}
-  - {fileID: 132967880}
+  waypoints: []
 --- !u!1 &1524896342
 GameObject:
   m_ObjectHideFlags: 0
