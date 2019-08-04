@@ -18,6 +18,10 @@ public class SwitchBase : MonoBehaviour
     }
 
 	void OnTick() {
-		
+		if (state) {
+			switch_enable.Invoke();
+		} else {
+			switch_disable.Invoke();
+		}
 	}
 }
