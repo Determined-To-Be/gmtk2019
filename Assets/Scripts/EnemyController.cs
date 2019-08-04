@@ -7,7 +7,6 @@ public class EnemyController : MonoBehaviour
 {
     int wpIdx = 0;
     Transform[] waypoints;
-    bool wasLit = false;
     SpriteRenderer weepieSpriteRenderer;
 
     public float moveSpeed = 16f;
@@ -63,19 +62,11 @@ public class EnemyController : MonoBehaviour
     {
         if (isLit)
         {
-            if (!wasLit)
-            {
-                weepieSpriteRenderer.sprite = weepieSprites[1];
-                SoundManager.Instance.PlaySound(SoundManager.PlayerSound.weep, true);
-                wasLit = true;
-            }
+            weepieSpriteRenderer.sprite = weepieSprites[1];
+            SoundManager.Instance.PlaySound(SoundManager.PlayerSound.weep, true);
             return;
         }
-        if (wasLit)
-        {
-            weepieSpriteRenderer.sprite = weepieSprites[0];
-            wasLit = false;
-        }
+        weepieSpriteRenderer.sprite = weepieSprites[0];
 
         Vector2 direction = CharacterController.instance.transform.position - transform.position;
         if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
