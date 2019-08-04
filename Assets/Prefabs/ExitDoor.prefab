@@ -123,6 +123,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Open: {fileID: 4744073622485524861, guid: 205f237baeb5ded4ebeea8e3480d3fa5, type: 3}
   Closed: {fileID: 6623719234781301212, guid: 205f237baeb5ded4ebeea8e3480d3fa5, type: 3}
-  Locked: {fileID: 21300000, guid: 666e8a1b10a66ca4bb9559eb830d0e16, type: 3}
-  NextLevel: Level3
-  isLocked: 1
+  Locked: {fileID: 5524357848326858643, guid: 205f237baeb5ded4ebeea8e3480d3fa5, type: 3}
+  NextLevel: 
+  isLocked: 0
