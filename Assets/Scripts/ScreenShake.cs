@@ -36,6 +36,10 @@ public class ScreenShake : MonoBehaviour
     }
 
 	public void Shake(float intensity, float duration) {
+		if (initPos != this.transform.position) {
+			initPos = this.transform.position;
+		}
+
 		StartCoroutine(shakeScreen(intensity, duration));
 	}
 
