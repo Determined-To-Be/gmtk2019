@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2937200412331361202}
   - component: {fileID: 2937200412331361207}
   - component: {fileID: 5650160815449947867}
+  - component: {fileID: 4902791716828556462}
   m_Layer: 10
   m_Name: Winkie
   m_TagString: Untagged
@@ -72,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 3654525642702839536, guid: 60d8d33d1ae710d4f8d3f3974b5b234f,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -151,6 +152,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
+--- !u!50 &4902791716828556462
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2937200412331361203}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &8655693265507656365
 GameObject:
   m_ObjectHideFlags: 0
