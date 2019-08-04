@@ -20,6 +20,12 @@ TextureImporter:
   - first:
       213: 8628524357566613946
     second: winkie_5
+  - first:
+      213: 3405695084524102816
+    second: winkie_6
+  - first:
+      213: 7180648474173690372
+    second: winkie_7
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -166,7 +172,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 23cd3c2ffa68fc7458fc8f8ace042bd5
+      spriteID: d4c1ca1047b8b9647bb5d793a6301c5a
       internalID: 3654525642702839536
       vertices: []
       indices: 
@@ -187,7 +193,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f621ca50acfe3a64eaeb2a2c297ca265
+      spriteID: 8f9c0fee244e2524baae23685109e561
       internalID: -707525574836573305
       vertices: []
       indices: 
@@ -208,7 +214,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3d8de2f5f2cd8de48a60d4a277d04bea
+      spriteID: fe55184a21fa54f448ac429bd2a87f7a
       internalID: -5710967935955672017
       vertices: []
       indices: 
@@ -216,6 +222,27 @@ TextureImporter:
       weights: []
     - serializedVersion: 2
       name: winkie_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a71df88f798eeed47a0a07a66e3b03cd
+      internalID: 1884019989199978023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: winkie_4
       rect:
         serializedVersion: 2
         x: 0
@@ -229,14 +256,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ca426caaae51ba24a8f296158ad4c456
-      internalID: 1884019989199978023
+      spriteID: ecccd30c45bded34bb6f23f9610b72cb
+      internalID: 5486478094258325138
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: winkie_4
+      name: winkie_5
       rect:
         serializedVersion: 2
         x: 32
@@ -250,14 +277,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b726f67a66512e14cacb9aa456c6ee4d
-      internalID: 5486478094258325138
+      spriteID: cf5813b966d939d48b48810e900e1f10
+      internalID: 8628524357566613946
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: winkie_5
+      name: winkie_6
       rect:
         serializedVersion: 2
         x: 64
@@ -271,8 +298,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b2bdee7b89aae3f4db501be0496982cb
-      internalID: 8628524357566613946
+      spriteID: 8d23d42ae8cb681478a8e6afec758756
+      internalID: 3405695084524102816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: winkie_7
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b994c980d4098c64684569c4f8f0761b
+      internalID: 7180648474173690372
       vertices: []
       indices: 
       edges: []
