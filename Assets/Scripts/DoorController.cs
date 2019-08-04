@@ -28,9 +28,4 @@ public class DoorController : PlayerInteractable
         }
     }
 
-    protected override void OnTick()
-    {
-        
-    }
-
 }

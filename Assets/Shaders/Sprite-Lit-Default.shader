@@ -22,6 +22,12 @@ Shader "Lightweight Render Pipeline/2D/Sprite-Lit-Stencil"
         Pass
         {
             Tags { "LightMode" = "Lightweight2D" }
+
+			Stencil {
+				Ref 1
+				Comp equal
+			}
+
             HLSLPROGRAM
             #pragma prefer_hlslcc gles
             #pragma vertex CombinedShapeLightVertex
@@ -105,10 +111,6 @@ Shader "Lightweight Render Pipeline/2D/Sprite-Lit-Stencil"
         Pass
         {
 
-				Stencil {
-					Ref 1
-					Comp equal
-				}
             Tags { "LightMode" = "NormalsRendering"}
             HLSLPROGRAM
             #pragma prefer_hlslcc gles

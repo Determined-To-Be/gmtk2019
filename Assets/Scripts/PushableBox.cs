@@ -73,11 +73,6 @@ public class PushableBox : PlayerInteractable
 		this.transform.position = new Vector3(Mathf.RoundToInt(this.transform.position.x), Mathf.RoundToInt(this.transform.position.y), this.transform.position.z);
 	}
 
-	protected override void OnTick()
-	{
-		//throw new System.NotImplementedException();
-	}
-
 	// Start is called before the first frame update
 	void Start()
     {
