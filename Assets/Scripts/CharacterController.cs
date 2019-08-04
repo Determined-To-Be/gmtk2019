@@ -95,15 +95,14 @@ public class CharacterController : MonoBehaviour
         foreach (RaycastHit2D hit in hits)
         {
             if (hit)
-            { //I hit something I can't move here
-              //Rebound
+            {
                 if (hit.transform.tag == "Interactable")
                 {
                     hit.transform.gameObject.GetComponent<PlayerInteractable>().OnPlayerInteration();
                 }
 
                 ScreenShake.instance.Shake(.1f, .1f);
-                SoundManager.instance.PlaySound(SoundManager.PlayerSound.wall, true);
+                SoundManager.Instance.PlaySound(SoundManager.PlayerSound.wall, true);
                 canMove = false;
                 break;
             }
@@ -115,7 +114,7 @@ public class CharacterController : MonoBehaviour
 
         if (canMove)
         {
-            SoundManager.instance.PlaySound(SoundManager.PlayerSound.step, true);
+            SoundManager.Instance.PlaySound(SoundManager.PlayerSound.step, true);
             StartCoroutine(MoveTo(transform.position + (Vector3)direction.normalized, moveSpeed));
         }
         else
@@ -166,7 +165,7 @@ public class CharacterController : MonoBehaviour
             if (item != null)
             {
                 if (item.gameObject != coll.gameObject)
-                    SoundManager.instance.PlaySound(SoundManager.PlayerSound.pickup);
+                    SoundManager.Instance.PlaySound(SoundManager.PlayerSound.pickup);
             }
             item = coll.gameObject.GetComponent<Item>();
         }

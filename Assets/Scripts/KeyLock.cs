@@ -16,7 +16,7 @@ public class KeyLock : PlayerInteractable
 			DestroyImmediate(CharacterController.instance.item.gameObject);
 			isLocked = false;
 			lockSprite.SetActive(false);
-			SoundManager.instance.PlaySound(SoundManager.PlayerSound.drop);
+			SoundManager.Instance.PlaySound(SoundManager.PlayerSound.drop);
 			normalBehavior.enabled = true;
 			DestroyImmediate(this);
 		}

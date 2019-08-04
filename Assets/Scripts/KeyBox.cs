@@ -14,7 +14,7 @@ public class KeyBox : PushableBox
 		if (CharacterController.instance.item.itemType == Item.ItemType.Key) {
 			isLocked = false;
 			lockSprite.SetActive(false);
-			SoundManager.instance.PlaySound(SoundManager.PlayerSound.drop);
+			SoundManager.Instance.PlaySound(SoundManager.PlayerSound.drop);
 		}
 
 		Vector3 dir = this.transform.position - CharacterController.instance.transform.position;
