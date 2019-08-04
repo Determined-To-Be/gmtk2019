@@ -29,7 +29,6 @@ public class PressurePlate : MonoBehaviour
             switch_disable.Invoke();
             wasState = false;
         }
-        state = false;
     }
 
     void OnTriggerStay2D(Collider2D collision)
