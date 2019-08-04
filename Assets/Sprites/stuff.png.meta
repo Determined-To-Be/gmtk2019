@@ -32,6 +32,9 @@ TextureImporter:
   - first:
       213: 3022810395285671588
     second: lantern
+  - first:
+      213: -8020520747641186783
+    second: stuff_0
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -377,6 +380,27 @@ TextureImporter:
       bones: []
       spriteID: 4b4d0f4031990c743ad8189953ec7bd4
       internalID: 3022810395285671588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stuff_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c26dc5995475dc43a968eba986c2d25
+      internalID: -8020520747641186783
       vertices: []
       indices: 
       edges: []
