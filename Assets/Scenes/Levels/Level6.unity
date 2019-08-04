@@ -692,7 +692,7 @@ PrefabInstance:
         type: 3}
       propertyPath: Locked
       value: 
-      objectReference: {fileID: -8020520747641186783, guid: 205f237baeb5ded4ebeea8e3480d3fa5,
+      objectReference: {fileID: 5524357848326858643, guid: 205f237baeb5ded4ebeea8e3480d3fa5,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42efd79f023a833469f67f92291cf159, type: 3}
