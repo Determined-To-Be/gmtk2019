@@ -46,7 +46,8 @@ public class LightSource : MonoBehaviour
                 {
                     hit.transform.gameObject.GetComponent<LightBox>().state = true;
                 }
-                else if (hit.collider.transform.tag == "Enemy")
+
+				if (hit.collider.transform.tag == "Enemy")
                 {
                     hit.transform.gameObject.GetComponent<EnemyController>().isLit = true;
                 }
