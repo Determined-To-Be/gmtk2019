@@ -4,8 +4,6 @@
 public class PressurePlate : SwitchBase
 {
     private SpriteRenderer plate;
-    private UnityEvent stepOn = new UnityEvent();
-
     public float dim = .75f;
 
     private void Start()
@@ -21,15 +19,5 @@ public class PressurePlate : SwitchBase
     private void OnCollisionExit2D(Collision2D collision)
     {
         plate.color = new Color(1f, 1f, 1f);
-    }
-
-    public void AddListener(UnityAction call)
-    {
-        stepOn.AddListener(call);
-    }
-
-    public void RemoveListener(UnityAction call)
-    {
-        stepOn.RemoveListener(call);
     }
 }
