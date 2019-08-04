@@ -18,6 +18,7 @@ public class TileTime : MonoBehaviour
 
 			GameObject go = new GameObject();
 			_instance = go.AddComponent<TileTime>();
+			_instance.transform.name = "TimeTime";
 			return _instance;
 		}
 

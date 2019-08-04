@@ -42,7 +42,7 @@ public class CharacterController : MonoBehaviour
 		if (direction == Vector2.up)
 			hit = Physics2D.Raycast(this.transform.position + Vector3.down * .1f, direction, .8f);
 		else
-			hit = Physics2D.Raycast(this.transform.position + Vector3.down * .1f, direction, 1);
+			hit = Physics2D.Raycast(this.transform.position + Vector3.down * .1f, direction, 1.1f);
 
 		Debug.DrawRay(this.transform.position, direction, Color.green);
 
@@ -68,12 +68,12 @@ public class CharacterController : MonoBehaviour
 		while (Vector2.Distance((Vector2)this.transform.position, goal) > .05f) {
 			this.transform.position = Vector3.Lerp(this.transform.position, goal, speed * Time.deltaTime);
 			yield return null;
-		}
+		}		
+		this.transform.position = new Vector3(Mathf.RoundToInt(this.transform.position.x), Mathf.RoundToInt(this.transform.position.y), this.transform.position.z);
 
 		if (item != null)
 			item.transform.position = lastpos;
-		
-		this.transform.position = new Vector3(Mathf.RoundToInt(this.transform.position.x), Mathf.RoundToInt(this.transform.position.y), this.transform.position.z);
+
 		canMove = true;
 	}
 }
