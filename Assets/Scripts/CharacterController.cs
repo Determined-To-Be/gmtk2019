@@ -40,9 +40,9 @@ public class CharacterController : MonoBehaviour
 
 		List<RaycastHit2D> hits = new List<RaycastHit2D>();
 		if (direction == Vector2.up){
-			hits.Add(Physics2D.Raycast(this.transform.position + Vector3.down * .1f, direction, .8f));
+			hits.Add(Physics2D.Raycast(this.transform.position + Vector3.down * .1f, direction, .8f, ~LayerMask.GetMask("Player", "Enviroment")));
 		} else {
-			hits.Add(Physics2D.Raycast(this.transform.position + Vector3.down * .1f, direction, 1.1f));
+			hits.Add(Physics2D.Raycast(this.transform.position + Vector3.down * .1f, direction, 1.1f, ~LayerMask.GetMask("Player", "Enviroment")));
 		}
 
 		Debug.DrawRay(this.transform.position, direction, Color.green);
