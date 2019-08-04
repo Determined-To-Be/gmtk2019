@@ -10,19 +10,19 @@ public class SoundManager : MonoBehaviour
     public float variety = .075f;
     public AudioClip[] playerClips, ambientClips, ambientTracks;
 
-    static SoundManager _instance;
-    public static SoundManager instance
+    static SoundManager _Instance;
+    public static SoundManager Instance
     {
         get
         {
-            if (_instance != null)
+            if (_Instance != null)
             {
-                return _instance;
+                return _Instance;
             }
 
             GameObject go = new GameObject();
-            _instance = go.AddComponent<SoundManager>();
-            return _instance;
+            _Instance = go.AddComponent<SoundManager>();
+            return _Instance;
         }
     }
 
@@ -35,14 +35,14 @@ public class SoundManager : MonoBehaviour
 
     void Awake()
     {
-        if (_instance == null)
-            _instance = GetComponent<SoundManager>();
-        else if (_instance != this)
+        if (_Instance == null)
+            _Instance = GetComponent<SoundManager>();
+        else if (_Instance != this)
             Destroy(gameObject);
         DontDestroyOnLoad(gameObject);
     }
 
-    IEnumerator doAudioClip(PlayerSound sound, bool different)
+    IEnumerator DoAudioClip(PlayerSound sound, bool different)
     {
         player[0].pitch = different ? Random.Range(1f - variety, 1f + variety) : 1f;
         player[0].clip = playerClips[(int)sound];
@@ -52,10 +52,10 @@ public class SoundManager : MonoBehaviour
 
     public void PlaySound(PlayerSound sound, bool different = false)
     {
-        StartCoroutine(doAudioClip(sound, different));
+        StartCoroutine(DoAudioClip(sound, different));
     }
 
-    IEnumerator doAmbientTracks()
+    IEnumerator DoAmbientTracks()
     {
         while (true)
         {
@@ -68,10 +68,10 @@ public class SoundManager : MonoBehaviour
 
     void PlayAmbientTracks()
     {
-        StartCoroutine(doAmbientTracks());
+        StartCoroutine(DoAmbientTracks());
     }
 
-    IEnumerator doAmbientClips()
+    IEnumerator DoAmbientClips()
     {
         while (true)
         {
@@ -84,6 +84,6 @@ public class SoundManager : MonoBehaviour
 
     void PlayAmbientClips()
     {
-        StartCoroutine(doAmbientClips());
+        StartCoroutine(DoAmbientClips());
     }
 }

@@ -19,7 +19,7 @@ public class EnemyController : MonoBehaviour
 
     void Start()
     {
-        TileTime.instance.AddListener(move);
+        TileTime.instance.AddListener(Move);
         if (enemy == Enemy.lurkie)
         {
             waypoints = path.GetComponentsInChildren<Transform>();
@@ -31,24 +31,24 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    void move()
+    void Move()
     {
         switch (enemy)
         {
             case Enemy.weepie:
-                weep();
+                Weep();
                 break;
             case Enemy.doppie:
-                dopple();
+                Dopple();
                 break;
             case Enemy.lurkie:
             default:
-                lurk();
+                Lurk();
                 break;
         }
     }
 
-    IEnumerator moveTo(Vector3 next)
+    IEnumerator MoveTo(Vector3 next)
     {
         while (Vector2.Distance(transform.position, next) > .05f)
         {
@@ -59,14 +59,14 @@ public class EnemyController : MonoBehaviour
         transform.position = next;
     }
 
-    void weep()
+    void Weep()
     {
         if (isLit)
         {
             if (!wasLit)
             {
                 weepieSpriteRenderer.sprite = weepieSprites[1];
-                SoundManager.instance.PlaySound(SoundManager.PlayerSound.weep, true);
+                SoundManager.Instance.PlaySound(SoundManager.PlayerSound.weep, true);
                 wasLit = true;
             }
             return;
@@ -115,10 +115,10 @@ public class EnemyController : MonoBehaviour
             }
         }
 
-        StartCoroutine(moveTo(transform.position + (Vector3)direction.normalized));
+        StartCoroutine(MoveTo(transform.position + (Vector3)direction.normalized));
     }
 
-    void dopple()
+    void Dopple()
     {
         Vector2 direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         if (isMirroredX)
@@ -157,15 +157,15 @@ public class EnemyController : MonoBehaviour
         {
             if (hit)
             {
-                SoundManager.instance.PlaySound(SoundManager.PlayerSound.dopple, true);
+                SoundManager.Instance.PlaySound(SoundManager.PlayerSound.dopple, true);
                 return;
             }
         }
 
-        StartCoroutine(moveTo(transform.position + (Vector3)direction.normalized));
+        StartCoroutine(MoveTo(transform.position + (Vector3)direction.normalized));
     }
 
-    void lurk()
+    void Lurk()
     {
         Vector2 direction = waypoints[wpIdx].position - transform.position;
         if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
@@ -210,11 +210,11 @@ public class EnemyController : MonoBehaviour
         {
             if (++wpIdx >= waypoints.Length)
             {
-                SoundManager.instance.PlaySound(SoundManager.PlayerSound.lurk, true);
+                SoundManager.Instance.PlaySound(SoundManager.PlayerSound.lurk, true);
                 wpIdx = 0;
             }
         }
 
-        StartCoroutine(moveTo(destination));
+        StartCoroutine(MoveTo(destination));
     }
 }
