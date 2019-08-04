@@ -4,16 +4,19 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     private Vector2 direction;
+    private int pointNum = 0;
 
     public enum Enemy { lurkie, weepie, doppie };
     public Enemy enemy;
     public float moveSpeed = 16f;
     public GameObject item = null;
     public bool isMirrorX = true, isLit = false;
+    public Transform[] waypoints;
 
     void Start()
     {
         TileTime.instance.AddListener(move);
+        gameObject.transform.position = waypoints[0].position;
     }
 
     void move()
@@ -73,8 +76,8 @@ public class EnemyController : MonoBehaviour
         {
             Vector2 pos = gameObject.transform.position;
             Vector2 place = CharacterController.instance.transform.position;
-            direction.x = pos.x > place.x ? Vector2.left.x : (pos.x < place.x ? Vector2.right.x : 0f);
-            direction.y = pos.y > place.y ? Vector2.down.y : (pos.y < place.y ? Vector2.up.y : 0f);
+            direction.x = pos.x > place.x ? Vector2.left.x : (pos.x < place.x ? Vector2.right.x : Input.GetAxisRaw("Horizontal"));
+            direction.y = pos.y > place.y ? Vector2.down.y : (pos.y < place.y ? Vector2.up.y : Input.GetAxisRaw("Vertical"));
         }
         else
         {
@@ -82,9 +85,9 @@ public class EnemyController : MonoBehaviour
         }
 
         if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
-            direction.y = 0;
+            direction.y = 0f;
         else
-            direction.x = 0;
+            direction.x = 0f;
 
         RaycastHit2D hit;
         if (direction == Vector2.up)
@@ -104,7 +107,37 @@ public class EnemyController : MonoBehaviour
 
     private void doLurkie()
     {
-        // TODO
+        direction = new Vector2();
+        Vector2 pos = gameObject.transform.position;
+        Vector2 place = waypoints[pointNum].position;
+        if (pos == place)
+        {
+            if (pointNum >= waypoints.Length)
+                pointNum = -1;
+            place = waypoints[++pointNum].position;
+        }
+        direction.x = pos.x > place.x ? Vector2.left.x : (pos.x < place.x ? Vector2.right.x : 0f);
+        direction.y = pos.y > place.y ? Vector2.down.y : (pos.y < place.y ? Vector2.up.y : 0f);
+
+        if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
+            direction.y = 0f;
+        else
+            direction.x = 0f;
+
+        RaycastHit2D hit;
+        if (direction == Vector2.up)
+            hit = Physics2D.Raycast(transform.position + Vector3.down * .1f, direction, .5f);
+        else
+            hit = Physics2D.Raycast(transform.position + Vector3.down * .1f, direction, 1);
+
+        Debug.DrawRay(transform.position, direction, Color.green);
+
+        if (hit)
+        {
+            return;
+        }
+
+        StartCoroutine(moveTo(transform.position + (Vector3)direction.normalized, moveSpeed));
     }
 
     IEnumerator moveTo(Vector2 goal, float speed)
