@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DoorController : PlayerInteractable
 {
     public Sprite Open;
     public Sprite Closed;
+    public string NextLevel;
 
     BoxCollider2D coll;
     SpriteRenderer rend;
@@ -25,6 +27,10 @@ public class DoorController : PlayerInteractable
         {
             coll.enabled = false;
             rend.sprite = Open;
+
+            //Wait for 1 sec?
+
+            SceneManager.LoadScene(NextLevel);
         }
     }
 
