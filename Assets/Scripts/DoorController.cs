@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoorController : PlayerInteractable
+public class DoorController : Switchable
 {
     public Sprite Open;
     public Sprite Closed;
@@ -21,7 +21,6 @@ public class DoorController : PlayerInteractable
 
     public override void OnPlayerInteration()
     {
-        Debug.Log("wow!");
         if (!isLocked)
         {
             coll.enabled = false;
@@ -32,5 +31,10 @@ public class DoorController : PlayerInteractable
     protected override void OnTick()
     {
         
+    }
+
+    public override void OnSwitchStateChange()
+    {
+        isLocked = !isLocked;
     }
 }
