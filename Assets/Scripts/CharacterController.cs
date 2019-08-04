@@ -19,7 +19,7 @@ public class CharacterController : MonoBehaviour
 	void Start()
 	{
 		TileTime.instance.AddListener(move);
-		instance = this.GetComponent<CharacterController>();
+		CharacterController.instance = this.GetComponent<CharacterController>();
 	}
 
 	// Update is called once per frame
