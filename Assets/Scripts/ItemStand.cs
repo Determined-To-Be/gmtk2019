@@ -7,7 +7,6 @@ public class ItemStand : PlayerInteractable
 	Item item = null;
 
 	public override void OnPlayerInteration(){
-		Debug.Log("I am Interacting with player");
 
 		Item tmp = item;
 		Vector3 ttmp = CharacterController.instance.item.transform.position;

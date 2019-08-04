@@ -331,7 +331,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
 --- !u!212 &170166014
 SpriteRenderer:
@@ -4629,7 +4629,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numRays: 50
-  distance: 1
+  distance: 2
   maskCutawayDst: 1
   mat: {fileID: 2100000, guid: 963ca1d275cd08b45a9ab07c6528c8a6, type: 2}
 --- !u!1001 &534541964359284528

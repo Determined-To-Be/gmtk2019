@@ -14,10 +14,10 @@ public class SwitchBase : MonoBehaviour
 	// Start is called before the first frame update
 	protected void Start()
     {
-		TileTime.instance.AddListener(OnTick);
+		//TileTime.instance.AddListener(OnTick);
     }
 
-	protected void OnTick() {
+	protected void Update() {
 		if (state) {
 			switch_enable.Invoke();
 		} else {
