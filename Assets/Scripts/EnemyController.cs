@@ -16,7 +16,8 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         TileTime.instance.AddListener(move);
-        gameObject.transform.position = waypoints[0].position;
+        if(enemy == Enemy.lurkie) 
+            gameObject.transform.position = waypoints[0].position;
     }
 
     void move()
