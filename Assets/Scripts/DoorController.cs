@@ -12,13 +12,23 @@ public class DoorController : PlayerInteractable
     BoxCollider2D coll;
     SpriteRenderer rend;
 
-    bool isLocked = false;
+    public bool isLocked = false;
 
     protected void Start()
     {
         base.Start();
         coll = this.GetComponent<BoxCollider2D>();
         rend = this.GetComponent<SpriteRenderer>();
+    }
+
+    public void LockDoor()
+    {
+        isLocked = true;
+    }
+
+    public void UnlockDoor()
+    {
+        isLocked = false;
     }
 
     public override void OnPlayerInteration()

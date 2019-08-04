@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -835,7 +835,6 @@ GameObject:
   - component: {fileID: 1869175887}
   - component: {fileID: 1869175886}
   - component: {fileID: 1869175885}
-  - component: {fileID: 1869175884}
   m_Layer: 0
   m_Name: Stuff
   m_TagString: Untagged
@@ -857,126 +856,6 @@ Transform:
   m_Father: {fileID: 1232873941}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!66 &1869175884
-CompositeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1869175882}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
-  m_GenerationType: 0
-  m_EdgeRadius: 0
-  m_ColliderPaths:
-  - m_Collider: {fileID: 1869175886}
-    m_ColliderPaths:
-    - - X: -15625232
-        Y: 45625000
-      - X: -15625232
-        Y: 54375000
-      - X: -24375000
-        Y: 54374768
-      - X: -24374768
-        Y: 45625000
-    - - X: -15625203
-        Y: 35625000
-      - X: -15625203
-        Y: 44375000
-      - X: -24375000
-        Y: 44374797
-      - X: -24374797
-        Y: 35625000
-    - - X: -15625174
-        Y: 25625000
-      - X: -15625174
-        Y: 34375000
-      - X: -24375000
-        Y: 34374826
-      - X: -24374826
-        Y: 25625000
-    - - X: -15625145
-        Y: 15625000
-      - X: -15625145
-        Y: 24375000
-      - X: -24375000
-        Y: 24374855
-      - X: -24374855
-        Y: 15625000
-    - - X: -15625116
-        Y: -14375000
-      - X: -15625116
-        Y: -5625000
-      - X: -24375000
-        Y: -5625116
-      - X: -24374884
-        Y: -14375000
-    - - X: -15625087
-        Y: -24375000
-      - X: -15625087
-        Y: -15625000
-      - X: -24375000
-        Y: -15625087
-      - X: -24374913
-        Y: -24375000
-    - - X: -15625058
-        Y: -34375000
-      - X: -15625058
-        Y: -25625000
-      - X: -24375000
-        Y: -25625058
-      - X: -24374942
-        Y: -34375000
-    - - X: -15625029
-        Y: -44375000
-      - X: -15625029
-        Y: -35625000
-      - X: -24375000
-        Y: -35625029
-      - X: -24374971
-        Y: -44375000
-  m_CompositePaths:
-    m_Paths:
-    - - {x: -1.5625261, y: 4.5625}
-      - {x: -1.5625261, y: 5.4375}
-      - {x: -2.4375, y: 5.4374743}
-      - {x: -2.437474, y: 4.5625}
-    - - {x: -1.5625232, y: 3.5625}
-      - {x: -1.5625232, y: 4.4375}
-      - {x: -2.4375, y: 4.4374766}
-      - {x: -2.4374769, y: 3.5625}
-    - - {x: -1.5625203, y: 2.5625}
-      - {x: -1.5625203, y: 3.4375}
-      - {x: -2.4375, y: 3.4374797}
-      - {x: -2.4374797, y: 2.5625}
-    - - {x: -1.5625174, y: 1.5625}
-      - {x: -1.5625174, y: 2.4375}
-      - {x: -2.4375, y: 2.4374826}
-      - {x: -2.4374826, y: 1.5625}
-    - - {x: -1.5625145, y: -1.4375}
-      - {x: -1.5625145, y: -0.5625}
-      - {x: -2.4375, y: -0.5625145}
-      - {x: -2.4374857, y: -1.4375}
-    - - {x: -1.5625116, y: -2.4375}
-      - {x: -1.5625116, y: -1.5625}
-      - {x: -2.4375, y: -1.5625116}
-      - {x: -2.4374883, y: -2.4375}
-    - - {x: -1.5625087, y: -3.4375}
-      - {x: -1.5625087, y: -2.5625}
-      - {x: -2.4375, y: -2.5625088}
-      - {x: -2.4374912, y: -3.4375}
-    - - {x: -1.5625058, y: -4.4375}
-      - {x: -1.5625058, y: -3.5625}
-      - {x: -2.4375, y: -3.5625057}
-      - {x: -2.4374943, y: -4.4375}
-  m_VertexDistance: 0.0005
-  m_OffsetDistance: 0.000005
 --- !u!50 &1869175885
 Rigidbody2D:
   serializedVersion: 4
@@ -1010,7 +889,7 @@ TilemapCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_UsedByComposite: 1
+  m_UsedByComposite: 0
   m_Offset: {x: 0.5, y: 0.5}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
