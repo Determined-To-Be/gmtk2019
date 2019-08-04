@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoorController : Switchable
+public class DoorController : PlayerInteractable
 {
     public Sprite Open;
     public Sprite Closed;
@@ -33,8 +33,4 @@ public class DoorController : Switchable
         
     }
 
-    public override void OnSwitchStateChange()
-    {
-        isLocked = !isLocked;
-    }
 }
