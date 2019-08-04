@@ -11,13 +11,15 @@ public class PressurePlate : SwitchBase
         plate = GetComponent<SpriteRenderer>();
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         plate.color = new Color(dim, dim, dim);
+		state = true;
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
         plate.color = new Color(1f, 1f, 1f);
-    }
+		state = false;
+	}
 }

@@ -11,7 +11,7 @@ public class CharacterController : MonoBehaviour
 	public bool canMove = true;
 	Vector2 direction;
 
-	public GameObject item;
+	public Item item;
 
 	public static CharacterController instance;
 
@@ -61,6 +61,7 @@ public class CharacterController : MonoBehaviour
 		//this.transform.position = new Vector3(Mathf.RoundToInt(this.transform.position.x) + .5f, Mathf.RoundToInt(this.transform.position.y) + .5f, 0);
 		//We need to clamp the position to an int and the plus .5 on the x and -.5 on the y
 		ScreenShake.instance.Shake(.1f, .1f);
+		SoundManager.instance.PlaySound(SoundManager.PlayerSound.step, true);
 		StartCoroutine(moveTo(this.transform.position + (Vector3)direction.normalized, moveSpeed));
 	}
 
