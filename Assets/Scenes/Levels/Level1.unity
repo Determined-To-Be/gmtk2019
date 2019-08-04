@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -187,6 +187,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 149657253403218511, guid: 6594a36b1012db8408caa550ab1e32dd,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 149657253403218511, guid: 6594a36b1012db8408caa550ab1e32dd,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 149657253403218511, guid: 6594a36b1012db8408caa550ab1e32dd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 149657253403218508, guid: 6594a36b1012db8408caa550ab1e32dd,
+        type: 3}
+      propertyPath: mat
+      value: 
+      objectReference: {fileID: 2100000, guid: 963ca1d275cd08b45a9ab07c6528c8a6, type: 2}
     - target: {fileID: 3951282208066496020, guid: 6594a36b1012db8408caa550ab1e32dd,
         type: 3}
       propertyPath: m_SortingOrder
@@ -4271,6 +4291,11 @@ PrefabInstance:
       propertyPath: grid
       value: 
       objectReference: {fileID: 788621044}
+    - target: {fileID: 2154751708050072937, guid: e10c2c4ccfa9b9b48894eba8b978ee3b,
+        type: 3}
+      propertyPath: mat
+      value: 
+      objectReference: {fileID: 2100000, guid: 963ca1d275cd08b45a9ab07c6528c8a6, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e10c2c4ccfa9b9b48894eba8b978ee3b, type: 3}
 --- !u!212 &2062654215 stripped

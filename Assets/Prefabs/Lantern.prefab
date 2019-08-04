@@ -46,7 +46,7 @@ MonoBehaviour:
   numRays: 900
   distance: 4
   maskCutawayDst: 1
-  mat: {fileID: 2100000, guid: 963ca1d275cd08b45a9ab07c6528c8a6, type: 2}
+  mat: {fileID: 2100000, guid: 96542ee52f9c2754fbb5fc673f0fd14d, type: 2}
 --- !u!1 &149657254022567530
 GameObject:
   m_ObjectHideFlags: 0
