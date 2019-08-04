@@ -15,11 +15,16 @@ public class ScreenShake : MonoBehaviour
 				return _instance;
 			}
 
-			GameObject go = new GameObject();
-			_instance = go.AddComponent<ScreenShake>();
+			_instance = Camera.main.gameObject.AddComponent<ScreenShake>();
 			return _instance;
 		}
 
+	}
+
+	void Awake(){
+		if (_instance == null){
+			_instance = this.GetComponent<ScreenShake>();
+		}
 	}
 
 	public Vector3 initPos;
@@ -37,7 +42,7 @@ public class ScreenShake : MonoBehaviour
 	IEnumerator shakeScreen(float intensity, float duration) {
 		float x = Random.Range(0, 100), y = Random.Range(0, 100);
 		while (duration > 0) {
-			this.transform.position = initPos + intensity * new Vector3(Mathf.PerlinNoise(x + duration, y + duration), Mathf.PerlinNoise(x + duration, y + duration));
+			this.transform.position = initPos + Random.insideUnitSphere * intensity;
 			duration -= Time.deltaTime;
 			yield return null;
 		}
