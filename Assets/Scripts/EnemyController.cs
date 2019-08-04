@@ -4,21 +4,22 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    public Vector2 direction;
-    private int pointNum = 0;
+    public int wpIdx = 0;
+    Transform[] waypoints;
 
+    public float moveSpeed;
     public enum Enemy { lurkie, weepie, doppie };
     public Enemy enemy;
-    public float moveSpeed = 16f;
-    public GameObject item = null;
-    public bool isMirrorX = true, isLit = false;
-    public Transform[] waypoints;
+    public GameObject path;
 
     void Start()
     {
         TileTime.instance.AddListener(move);
-        if(enemy == Enemy.lurkie) 
-            gameObject.transform.position = waypoints[0].position;
+        if (enemy == Enemy.lurkie)
+        {
+            waypoints = path.GetComponentsInChildren<Transform>();
+            gameObject.transform.position = waypoints[wpIdx].position;
+        }
     }
 
     void move()
@@ -26,92 +27,33 @@ public class EnemyController : MonoBehaviour
         switch (enemy)
         {
             case Enemy.weepie:
-                doWeepie();
+
                 break;
             case Enemy.doppie:
-                doDoppie();
+
                 break;
             case Enemy.lurkie:
             default:
-                doLurkie();
+                lurk();
                 break;
         }
     }
 
-    private void doDoppie()
+    IEnumerator moveTo(Vector3 next)
     {
-        direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        if (isMirrorX)
+        while (Vector2.Distance(transform.position, next) > .05f)
         {
-            direction.x *= -1f;
-        }
-        else
-        {
-            direction.y *= -1f;
+            transform.position = Vector3.Lerp(transform.position, next, moveSpeed * Time.deltaTime);
+            yield return null;
         }
 
-        if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
-            direction.y = 0;
-        else
-            direction.x = 0;
-
-        RaycastHit2D hit;
-        if (direction == Vector2.up)
-            hit = Physics2D.Raycast(transform.position + Vector3.down * .1f, direction, .5f);
-        else
-            hit = Physics2D.Raycast(transform.position + Vector3.down * .1f, direction, 1);
-
-        Debug.DrawRay(transform.position, direction, Color.green);
-
-        if (hit)
-        {
-            return;
-        }
-
-        StartCoroutine(moveTo(transform.position + (Vector3)direction.normalized, moveSpeed));
+        transform.position = next;
     }
 
-    private void doWeepie()
+    void lurk()
     {
-        direction = new Vector2();
-        if (!isLit)
-        {
-            Vector2 pos = gameObject.transform.position;
-            Vector2 place = CharacterController.instance.transform.position;
-            direction.x = pos.x > place.x ? Vector2.left.x : (pos.x < place.x ? Vector2.right.x : Input.GetAxisRaw("Horizontal"));
-            direction.y = pos.y > place.y ? Vector2.down.y : (pos.y < place.y ? Vector2.up.y : Input.GetAxisRaw("Vertical"));
-        }
-        else
-        {
-            isLit = false;
-        }
+        Vector2 direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-        if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
-            direction.y = 0f;
-        else
-            direction.x = 0f;
-
-        RaycastHit2D hit;
-        if (direction == Vector2.up)
-            hit = Physics2D.Raycast(transform.position + Vector3.down * .1f, direction, .5f);
-        else
-            hit = Physics2D.Raycast(transform.position + Vector3.down * .1f, direction, 1);
-
-        Debug.DrawRay(transform.position, direction, Color.green);
-
-        if (hit)
-        {
-            return;
-        }
-
-        StartCoroutine(moveTo(transform.position + (Vector3)direction.normalized, moveSpeed));
-    }
-
-    private void doLurkie()
-    {
-        direction = -direction;
-
-        //We need to prevent the character from moving in the direction of a wall or a collision
         if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
             direction.y = 0;
         else
@@ -120,20 +62,32 @@ public class EnemyController : MonoBehaviour
         List<RaycastHit2D> hits = new List<RaycastHit2D>();
         if (direction == Vector2.up)
         {
-            hits.Add(Physics2D.Raycast(this.transform.position + Vector3.down * .1f, direction, .8f));
+            hits.Add(Physics2D.Raycast(this.transform.position + Vector3.down * .1f + Vector3.left * .1f, direction, .8f, ~LayerMask.GetMask("Player", "Enviroment", "Item")));
+            hits.Add(Physics2D.Raycast(this.transform.position + Vector3.down * .1f + Vector3.right * .1f, direction, .8f, ~LayerMask.GetMask("Player", "Enviroment", "Item")));
+
+            Debug.DrawRay(this.transform.position + Vector3.down * .1f + Vector3.left * .1f, direction * .8f);
+            Debug.DrawRay(this.transform.position + Vector3.down * .1f + Vector3.right * .1f, direction * .8f);
+
+        }
+        else if (direction == Vector2.down)
+        {
+            hits.Add(Physics2D.Raycast(this.transform.position + Vector3.down * .1f + Vector3.left * .1f, direction, 1.1f, ~LayerMask.GetMask("Player", "Enviroment", "Item")));
+            hits.Add(Physics2D.Raycast(this.transform.position + Vector3.down * .1f + Vector3.right * .1f, direction, 1.1f, ~LayerMask.GetMask("Player", "Enviroment", "Item")));
+
+            Debug.DrawRay(this.transform.position + Vector3.down * .1f + Vector3.left * .1f, direction * 1.1f);
+            Debug.DrawRay(this.transform.position + Vector3.down * .1f + Vector3.right * .1f, direction * 1.1f);
         }
         else
         {
-            hits.Add(Physics2D.Raycast(this.transform.position + Vector3.down * .1f, direction, 1.1f));
-        }
+            hits.Add(Physics2D.Raycast(this.transform.position + Vector3.down * .1f, direction, 1.1f, ~LayerMask.GetMask("Player", "Enviroment", "Item")));
 
-        Debug.DrawRay(this.transform.position, direction, Color.green);
+            Debug.DrawRay(this.transform.position + Vector3.down * .1f, direction * 1.1f);
+        }
 
         foreach (RaycastHit2D hit in hits)
         {
             if (hit)
-            { //I hit something I can't move here
-              //Rebound
+            {
                 if (hit.transform.tag == "Interactable")
                 {
                     hit.transform.gameObject.GetComponent<PlayerInteractable>().OnPlayerInteration();
@@ -141,23 +95,9 @@ public class EnemyController : MonoBehaviour
                 return;
             }
         }
-        SoundManager.instance.PlaySound(SoundManager.PlayerSound.lurk, true);
-        StartCoroutine(moveTo(this.transform.position + (Vector3)direction.normalized, moveSpeed));
-    }
 
-    IEnumerator moveTo(Vector2 goal, float speed)
-    {
-        Vector3 lastpos = transform.position;
+        Vector3 destination = transform.position + (Vector3)direction.normalized;
 
-        while (Vector2.Distance(transform.position, goal) > .05f)
-        {
-            transform.position = Vector3.Lerp(transform.position, goal, speed * Time.deltaTime);
-            yield return null;
-        }
-
-        if (item != null)
-            item.transform.position = lastpos;
-
-        transform.position = new Vector3(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y), transform.position.z);
+        StartCoroutine(moveTo(destination));
     }
 }
