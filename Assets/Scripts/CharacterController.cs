@@ -13,10 +13,13 @@ public class CharacterController : MonoBehaviour
 
 	public GameObject item;
 
+	public static CharacterController instance;
+
 	// Start is called before the first frame update
 	void Start()
 	{
 		TileTime.instance.AddListener(move);
+		instance = this.GetComponent<CharacterController>();
 	}
 
 	// Update is called once per frame
@@ -44,7 +47,7 @@ public class CharacterController : MonoBehaviour
 		Debug.DrawRay(this.transform.position, direction, Color.green);
 
 		if (hit){ //I hit something I can't move here
-				  //Rebound
+			//Rebound
 			if (hit.transform.tag == "Interactable") {
 				hit.transform.gameObject.GetComponent<PlayerInteractable>().OnPlayerInteration();
 			}
