@@ -13,7 +13,7 @@ public class SwitchBase : MonoBehaviour
 		TileTime.instance.AddListener(Tick);    
     }
 
-	void Tick() {
+	void onTick() {
 
 	}
 
