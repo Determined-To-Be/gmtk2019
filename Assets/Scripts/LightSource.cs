@@ -39,10 +39,10 @@ public class LightSource : MonoBehaviour
 			float x = Mathf.Cos(i), y = Mathf.Sin(i);
 			Vector2 dir = new Vector2(x, y);
 
-			RaycastHit2D hit = Physics2D.Raycast(this.transform.position, dir, distance, ~LayerMask.GetMask("Player", "Enviroment"));
+			RaycastHit2D hit = Physics2D.Raycast(this.transform.position, dir, distance, ~LayerMask.GetMask("Player", "Enviroment", "Item"));
 
-			if (hit == false || i < Mathf.PI) {
-				hit.point = (Vector2)this.transform.position + dir * distance;	
+			if (hit == false || i < Mathf.PI){
+				hit.point = (Vector2)this.transform.position + dir * distance;
 			}
 
 			/*if (hit.transform.tag == "LightBox") {

@@ -11,7 +11,7 @@ public class CharacterController : MonoBehaviour
 	public bool canMove = true;
 	Vector2 direction;
 
-	public Item item;
+	public GameObject item;
 
 	public static CharacterController instance;
 
@@ -40,14 +40,25 @@ public class CharacterController : MonoBehaviour
 
 		List<RaycastHit2D> hits = new List<RaycastHit2D>();
 		if (direction == Vector2.up){
-			hits.Add(Physics2D.Raycast(this.transform.position + Vector3.down * .1f, direction, .8f, ~LayerMask.GetMask("Player", "Enviroment")));
-		} else {
-			hits.Add(Physics2D.Raycast(this.transform.position + Vector3.down * .1f, direction, 1.1f, ~LayerMask.GetMask("Player", "Enviroment")));
+			hits.Add(Physics2D.Raycast(this.transform.position + Vector3.down * .1f + Vector3.left * .1f, direction, .8f, ~LayerMask.GetMask("Player", "Enviroment", "Item")));
+			hits.Add(Physics2D.Raycast(this.transform.position + Vector3.down * .1f + Vector3.right * .1f, direction, .8f, ~LayerMask.GetMask("Player", "Enviroment", "Item")));
+
+			Debug.DrawRay(this.transform.position + Vector3.down * .1f + Vector3.left * .1f, direction * .8f);
+			Debug.DrawRay(this.transform.position + Vector3.down * .1f + Vector3.right * .1f, direction * .8f);
+
+		} else if (direction == Vector2.down) {
+			hits.Add(Physics2D.Raycast(this.transform.position + Vector3.down * .1f + Vector3.left * .1f, direction, 1.1f, ~LayerMask.GetMask("Player", "Enviroment", "Item")));
+			hits.Add(Physics2D.Raycast(this.transform.position + Vector3.down * .1f + Vector3.right * .1f, direction, 1.1f, ~LayerMask.GetMask("Player", "Enviroment", "Item")));
+
+			Debug.DrawRay(this.transform.position + Vector3.down * .1f + Vector3.left * .1f, direction * 1.1f);
+			Debug.DrawRay(this.transform.position + Vector3.down * .1f + Vector3.right * .1f, direction * 1.1f);
+		} else{
+			hits.Add(Physics2D.Raycast(this.transform.position + Vector3.down * .1f, direction, 1.1f, ~LayerMask.GetMask("Player", "Enviroment", "Item")));
+
+			Debug.DrawRay(this.transform.position + Vector3.down * .1f, direction * 1.1f);
 		}
 
-		Debug.DrawRay(this.transform.position, direction, Color.green);
-
-		foreach(RaycastHit2D hit in hits) {
+		foreach (RaycastHit2D hit in hits) {
 			if (hit){ //I hit something I can't move here
 				//Rebound
 				if (hit.transform.tag == "Interactable") {
@@ -79,5 +90,12 @@ public class CharacterController : MonoBehaviour
 			item.transform.position = lastpos;
 
 		canMove = true;
+	}
+
+	void OnTriggerEnter2D(Collider2D coll)
+	{
+		if (coll.transform.tag == "Item") {
+			item = coll.gameObject;
+		}
 	}
 }
