@@ -1,9 +1,10 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    private Vector2 direction;
+    public Vector2 direction;
     private int pointNum = 0;
 
     public enum Enemy { lurkie, weepie, doppie };
@@ -108,37 +109,40 @@ public class EnemyController : MonoBehaviour
 
     private void doLurkie()
     {
-        direction = new Vector2();
-        Vector2 pos = gameObject.transform.position;
-        Vector2 place = waypoints[pointNum].position;
-        if (pos == place)
-        {
-            if (pointNum >= waypoints.Length)
-                pointNum = -1;
-            place = waypoints[++pointNum].position;
-        }
-        direction.x = pos.x > place.x ? Vector2.left.x : (pos.x < place.x ? Vector2.right.x : 0f);
-        direction.y = pos.y > place.y ? Vector2.down.y : (pos.y < place.y ? Vector2.up.y : 0f);
+        direction = -direction;
 
+        //We need to prevent the character from moving in the direction of a wall or a collision
         if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
-            direction.y = 0f;
+            direction.y = 0;
         else
-            direction.x = 0f;
+            direction.x = 0;
 
-        RaycastHit2D hit;
+        List<RaycastHit2D> hits = new List<RaycastHit2D>();
         if (direction == Vector2.up)
-            hit = Physics2D.Raycast(transform.position + Vector3.down * .1f, direction, .5f);
-        else
-            hit = Physics2D.Raycast(transform.position + Vector3.down * .1f, direction, 1);
-
-        Debug.DrawRay(transform.position, direction, Color.green);
-
-        if (hit)
         {
-            return;
+            hits.Add(Physics2D.Raycast(this.transform.position + Vector3.down * .1f, direction, .8f));
+        }
+        else
+        {
+            hits.Add(Physics2D.Raycast(this.transform.position + Vector3.down * .1f, direction, 1.1f));
         }
 
-        StartCoroutine(moveTo(transform.position + (Vector3)direction.normalized, moveSpeed));
+        Debug.DrawRay(this.transform.position, direction, Color.green);
+
+        foreach (RaycastHit2D hit in hits)
+        {
+            if (hit)
+            { //I hit something I can't move here
+              //Rebound
+                if (hit.transform.tag == "Interactable")
+                {
+                    hit.transform.gameObject.GetComponent<PlayerInteractable>().OnPlayerInteration();
+                }
+                return;
+            }
+        }
+        SoundManager.instance.PlaySound(SoundManager.PlayerSound.lurk, true);
+        StartCoroutine(moveTo(this.transform.position + (Vector3)direction.normalized, moveSpeed));
     }
 
     IEnumerator moveTo(Vector2 goal, float speed)
