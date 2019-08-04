@@ -8,8 +8,7 @@ public class SoundManager : MonoBehaviour
 
     public enum PlayerSound { death, dopple, lurk, weep, drop, pickup, step, wall };
     public float variety;
-    public AudioClip[] playerClips;
-    public AudioClip[] ambientTracks;
+    public AudioClip[] playerClips, ambientClips, ambientTracks;
 
     static SoundManager _instance;
     public static SoundManager instance
@@ -31,6 +30,7 @@ public class SoundManager : MonoBehaviour
     {
         player = GetComponents<AudioSource>();
         PlayAmbientTracks();
+        PlayAmbientClips();
     }
 
     void Awake()
@@ -69,5 +69,21 @@ public class SoundManager : MonoBehaviour
     void PlayAmbientTracks()
     {
         StartCoroutine(doAmbientTracks());
+    }
+
+    IEnumerator doAmbientClips()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(Random.Range(10f, 30f));
+            player[2].clip = ambientClips[Mathf.FloorToInt(Random.Range(0f, (ambientClips.Length - Mathf.Epsilon)))];
+            player[2].Play();
+            yield return new WaitWhile(() => player[2].isPlaying);
+        }
+    }
+
+    void PlayAmbientClips()
+    {
+        StartCoroutine(doAmbientClips());
     }
 }
