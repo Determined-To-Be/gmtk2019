@@ -43,7 +43,7 @@ public class LightSource : MonoBehaviour
 
 			RaycastHit2D hit = Physics2D.Raycast(this.transform.position, dir, distance, ~LayerMask.GetMask("Player", "Enviroment", "Item"));
 
-			if (hit == false || i < Mathf.PI){
+			if (hit == false){
 				hit.point = (Vector2)this.transform.position + dir * distance;
 			}
 
