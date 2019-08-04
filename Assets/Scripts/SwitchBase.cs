@@ -10,14 +10,12 @@ public class SwitchBase : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
     {
-        
+		TileTime.instance.AddListener(Tick);    
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	void Tick() {
+
+	}
 
 	public void AddListener(UnityAction call)
 	{
