@@ -32,7 +32,7 @@ public class TileTime : MonoBehaviour
 		}
     }
 
-	void Tick() {
+	public void Tick() {
 		tile_event.Invoke();
 	}
 

@@ -27,7 +27,7 @@ public class CharacterController : MonoBehaviour
 	{
 		direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 		if (canMove && direction.sqrMagnitude > .1f) {
-			move();
+			TileTime.instance.Tick();
 		}
 	}
 
