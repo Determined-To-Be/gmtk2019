@@ -1,26 +1,46 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
-
-public class PressurePlate : SwitchBase
+public class PressurePlate : MonoBehaviour
 {
     private SpriteRenderer plate;
-    public float dim = .75f;
+    bool wasState = false;
 
-    private void Start()
+    public float dim = .75f;
+    public bool state = false;
+    public UnityEvent switch_enable = new UnityEvent();
+    public UnityEvent switch_disable = new UnityEvent();
+
+    void Start()
     {
-		//base.Start();
+        TileTime.instance.AddListener(OnTick);
         plate = GetComponent<SpriteRenderer>();
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    void OnTick()
     {
-        plate.color = new Color(dim, dim, dim);
-		state = true;
+        if (state && !wasState)
+        {
+            switch_enable.Invoke();
+            wasState = true;
+        }
+        else if (!state && wasState)
+        {
+            switch_disable.Invoke();
+            wasState = false;
+        }
+        state = false;
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    void OnTriggerStay2D(Collider2D collision)
+    {
+        plate.color = new Color(dim, dim, dim);
+        state = true;
+    }
+
+    void OnTriggerExit2D(Collider2D collision)
     {
         plate.color = new Color(1f, 1f, 1f);
-		state = false;
-	}
+        state = false;
+    }
 }
